@@ -8,34 +8,36 @@ on:
       - master
 jobs:
   Deploy-Preview:
-    runs-on: ubuntu-latest
-    services:
-      postgres:
-        image: postgres
+    container-job:
+      runs-on: ubuntu-latest
+      container: node:10.18-jessie
+      services:
+        postgres:
+          image: postgres
 
-        env:
-          POSTGRES_PASSWORD: postgres
-          POSTGRES_USER: postgres
-          POSTGRES_DB: postgres
+          env:
+            POSTGRES_PASSWORD: postgres
+            POSTGRES_USER: postgres
+            POSTGRES_DB: postgres
 
-        options: >-
-          --health-cmd pg_isready
-          --health-interval 10s
-          --health-timeout 5s
-          --health-retries 5
-        ports:
-          - 5432:5432
-    steps:
-      - uses: actions/checkout@v3
-      - name: Install Vercel CLI
-        run: npm install --global vercel@canary
-      - name: Pull Vercel Environment Information
-        run: vercel pull --yes --environment=preview --token=${{ secrets.VERCEL_TOKEN }}
-      - name: Build Project Artifacts
-        run: vercel build --token=${{ secrets.VERCEL_TOKEN }}
-        env:
-          DATABASE_URL: "postgres://postgres:postgres@localhost:5432/postgres"
-      - name: Deploy Project Artifacts to Vercel
-        run: vercel deploy --prebuilt --token=${{ secrets.VERCEL_TOKEN }}
-        env:
-          DATABASE_URL: "postgres://postgres:postgres@localhost:5432/postgres"
+          options: >-
+            --health-cmd pg_isready
+            --health-interval 10s
+            --health-timeout 5s
+            --health-retries 5
+          ports:
+            - 5432:5432
+      steps:
+        - uses: actions/checkout@v3
+        - name: Install Vercel CLI
+          run: npm install --global vercel@canary
+        - name: Pull Vercel Environment Information
+          run: vercel pull --yes --environment=preview --token=${{ secrets.VERCEL_TOKEN }}
+        - name: Build Project Artifacts
+          run: vercel build --token=${{ secrets.VERCEL_TOKEN }}
+          env:
+            DATABASE_URL: "postgres://postgres:postgres@localhost:5432/postgres"
+        - name: Deploy Project Artifacts to Vercel
+          run: vercel deploy --prebuilt --token=${{ secrets.VERCEL_TOKEN }}
+          env:
+            DATABASE_URL: "postgres://postgres:postgres@localhost:5432/postgres"
