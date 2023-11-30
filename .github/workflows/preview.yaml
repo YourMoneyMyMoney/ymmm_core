@@ -34,12 +34,8 @@ jobs:
       - name: Build Project Artifacts
         run: vercel build --token=${{ secrets.VERCEL_TOKEN }}
         env:
-          DBURL: "postgres://postgres:postgres@localhost:5432/postgres"
+          DATABASE_URL: "postgres://postgres:postgres@localhost:5432/postgres"
       - name: Deploy Project Artifacts to Vercel
         run: vercel deploy --prebuilt --token=${{ secrets.VERCEL_TOKEN }}
         env:
-          DBURL: "postgres://postgres:postgres@localhost:5432/postgres"
-      - name: Rollback to protect DB
-        run: npx prisma migrate resolve --rolled-back ${{ github.event.inputs.migration-id }}
-        env:
-          DBURL: "postgres://postgres:postgres@localhost:5432/postgres"
+          DATABASE_URL: "postgres://postgres:postgres@localhost:5432/postgres"
