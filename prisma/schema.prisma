@@ -14,12 +14,12 @@ model User {
   id       Int     @id @default(autoincrement())
   email    String  @unique
   name     String?
-  password String
-  platform String?
-  userPosts    UserPost[]
+  platform String
+  uid      String  @unique
+  userBooks    UserBook[]
 }
 
-model UserPost {
+model UserBook {
   id        Int     @id @default(autoincrement())
   member    User    @relation(fields: [memberId], references: [id])
   memberId  Int
@@ -30,5 +30,5 @@ model UserPost {
 model Book {
   id        Int     @id @default(autoincrement())
   title     String
-  userPosts  UserPost[]
+  userBooks  UserBook[]
 }
