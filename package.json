@@ -8,6 +8,7 @@
     "start": "npm run build && next start",
     "lint": "next lint",
     "migrate": "npx prisma migrate dev",
+    "postinstall": "npx prisma generate",
     "vercel-build": "npx prisma generate && npx prisma migrate deploy && next build",
     "prisma:generate": "npx prisma generate"
   },
