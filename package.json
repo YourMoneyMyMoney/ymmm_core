@@ -10,7 +10,8 @@
     "migrate": "npx prisma migrate dev",
     "postinstall": "npx prisma generate",
     "vercel-build": "npx prisma generate && npx prisma migrate deploy && next build",
-    "prisma:generate": "npx prisma generate"
+    "prisma:generate": "npx prisma generate",
+    "migrate:rollback": "prisma migrate resolve --rolled-back"
   },
   "dependencies": {
     "@prisma/client": "^4.8.1",
