@@ -99,6 +99,32 @@ exports.Prisma.QueryMode = makeEnum({
   insensitive: 'insensitive'
 });
 
+exports.Prisma.RecordCatetoryScalarFieldEnum = makeEnum({
+  id: 'id',
+  name: 'name'
+});
+
+exports.Prisma.RecordScalarFieldEnum = makeEnum({
+  id: 'id',
+  effectiveDate: 'effectiveDate',
+  amount: 'amount',
+  authorId: 'authorId',
+  typeId: 'typeId',
+  categoryId: 'categoryId',
+  bookId: 'bookId'
+});
+
+exports.Prisma.RecordTypeScalarFieldEnum = makeEnum({
+  id: 'id',
+  name: 'name'
+});
+
+exports.Prisma.RecordUserScalarFieldEnum = makeEnum({
+  id: 'id',
+  effectedUserId: 'effectedUserId',
+  recordId: 'recordId'
+});
+
 exports.Prisma.SortOrder = makeEnum({
   asc: 'asc',
   desc: 'desc'
@@ -129,7 +155,11 @@ exports.Prisma.UserScalarFieldEnum = makeEnum({
 exports.Prisma.ModelName = makeEnum({
   User: 'User',
   UserBook: 'UserBook',
-  Book: 'Book'
+  Book: 'Book',
+  RecordUser: 'RecordUser',
+  Record: 'Record',
+  RecordType: 'RecordType',
+  RecordCatetory: 'RecordCatetory'
 });
 
 /**
