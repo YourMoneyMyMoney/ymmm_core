@@ -1,0 +1,75 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "./generated/client"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id            Int     @id @default(autoincrement())
+  email         String  @unique
+  name          String?
+  platform      String
+  uid           String  @unique
+  userBooks     UserBook[]
+  records       Record[]
+  recordUser    RecordUser[]
+}
+
+// many to many solution(User:Book)
+model UserBook {
+  id            Int     @id @default(autoincrement())
+  member        User    @relation(fields: [memberId], references: [id])
+  memberId      Int
+  book          Book    @relation(fields: [bookId], references: [id])
+  bookId        Int
+}
+
+model Book {
+  id            Int     @id @default(autoincrement())
+  title         String
+  userBooks     UserBook[]
+  records       Record[]
+}
+
+// many to many solution(Record:User)
+model RecordUser {
+  id            Int     @id @default(autoincrement())
+  effectedUser  User    @relation(fields: [effectedUserId], references: [id])
+  effectedUserId Int
+  record        Record  @relation(fields: [recordId],references: [id])
+  recordId      Int
+}
+
+model Record {
+  id            Int @id @default(autoincrement())
+  effectiveDate DateTime
+  amount        Decimal @db.Decimal(3,2)
+  author        User @relation(fields: [authorId],references: [id])
+  authorId      Int 
+  type          RecordType @relation(fields: [typeId], references: [id]) // income, expense
+  typeId        Int
+  category      RecordCatetory @relation(fields: [categoryId], references: [id]) // food, 
+  categoryId    Int
+  book          Book    @relation(fields: [bookId], references: [id])
+  bookId        Int
+  recordUser    RecordUser[]
+}
+
+model RecordType {
+  id            Int @id @default(autoincrement())
+  name          String
+  record        Record[]
+}
+
+model RecordCatetory {
+  id            Int @id @default(autoincrement())
+  name          String
+  record        Record[]
+}
