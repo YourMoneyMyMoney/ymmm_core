@@ -1,10 +1,12 @@
 import prisma from '@/app/lib/prisma';
 import firebase_app from "@/app/lib/firebase-config";
 import { createUserWithEmailAndPassword, getAuth } from "firebase/auth";
+import { platform } from 'os';
 
 interface RequestBody {
   email: string;
   password: string;
+  name: string;
   platform: string;
 }
 
@@ -18,7 +20,7 @@ export async function GET(request: Request) {
     const users = await prisma.user.findMany();
     return new Response(JSON.stringify(users));
   } else {
-    const user = await prisma.user.findUnique({ where: { email: email } });
+    const user = await prisma.user.findFirst({ where: {email: email, platform: 'ymmm'}});
     return new Response(JSON.stringify(user));
   }
 }
@@ -27,7 +29,7 @@ export async function GET(request: Request) {
 export async function POST(request: Request) {
   const body: RequestBody = await request.json();
   // 2. check email existing from postgressql
-  const users = await prisma.user.findMany({where: {email: body.email}});
+  const users = await prisma.user.findMany({where: {email: body.email, platform: body.platform}});
   if(users.length !== 0){
     return new Response(JSON.stringify('Existing email, please use other email'));
   }
@@ -42,6 +44,7 @@ export async function POST(request: Request) {
       data: {
         uid: result?.user?.uid,
         email: body.email,
+        name: body.name,
         platform: body.platform,
       },
     });
