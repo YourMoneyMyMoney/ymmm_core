@@ -1,6 +1,11 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
     async headers() {
+        if(req.method === 'OPTIONS') {
+            return res.status(200).json(({
+                body: "OK"
+            }))
+        };
         return [
             {
                 // matching all API routes
