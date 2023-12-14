@@ -52,3 +52,7 @@ export async function POST(request: Request) {
 
   return new Response(JSON.stringify(result));
 }
+
+export async function OPTIONS(request: Request) {
+  return new Response(JSON.stringify({status: 200}));
+}
