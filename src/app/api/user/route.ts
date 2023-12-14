@@ -9,10 +9,7 @@ interface RequestBody {
 }
 
 const auth = getAuth(firebase_app);
-const headers = {
-  'Access-Control-Allow-Origin' : '*',
-  'Content-Type' : 'application/json',
-};
+
 // fetch user / all users
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
@@ -50,8 +47,8 @@ export async function POST(request: Request) {
     });
   } catch (e) {
       error = e;
-      return new Response(JSON.stringify(error), {headers:headers});
+      return new Response(JSON.stringify(error));
   }
 
-  return new Response(JSON.stringify(result),{headers:headers});
+  return new Response(JSON.stringify(result));
 }
