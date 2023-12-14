@@ -51,7 +51,7 @@ export async function POST(request: Request) {
       { 
         success: true, 
         status: 200, 
-        headers:{'contents-type':'application/json'},
+        headers:{'content-type':'application/json'},
         cookies: {
           name: "token",
           value: token,
