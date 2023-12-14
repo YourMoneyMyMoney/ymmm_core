@@ -9,17 +9,20 @@ interface RequestBody {
 }
 
 const auth = getAuth(firebase_app);
-
+const headers = {
+  'Access-Control-Allow-Origin' : '*',
+  'Content-Type' : 'application/json',
+};
 // fetch user / all users
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
   const email = searchParams.get('email');
   if(email === null) {
     const users = await prisma.user.findMany();
-    return Response.json( users );
+    return new Response(JSON.stringify(users), {headers: headers});
   } else {
     const user = await prisma.user.findUnique({ where: { email: email } });
-    return Response.json({ user });
+    return new Response(JSON.stringify(user), {headers: headers});
   }
 }
 
@@ -29,7 +32,7 @@ export async function POST(request: Request) {
   // 2. check email existing from postgressql
   const users = await prisma.user.findMany({where: {email: body.email}});
   if(users.length !== 0){
-    return Response.json('Existing email, please use other email');
+    return new Response(JSON.stringify('Existing email, please use other email'), {headers: headers});
   }
   
   // 3. create user in firebase 
@@ -47,8 +50,8 @@ export async function POST(request: Request) {
     });
   } catch (e) {
       error = e;
-      return new Response(JSON.stringify(error));
+      return new Response(JSON.stringify(error), {headers:headers});
   }
 
-  return new Response(JSON.stringify(result));
+  return new Response(JSON.stringify(result),{headers:headers});
 }
