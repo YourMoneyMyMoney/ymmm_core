@@ -19,10 +19,10 @@ export async function GET(request: Request) {
   const email = searchParams.get('email');
   if(email === null) {
     const users = await prisma.user.findMany();
-    return new Response(JSON.stringify(users), {headers: headers});
+    return new Response(JSON.stringify(users));
   } else {
     const user = await prisma.user.findUnique({ where: { email: email } });
-    return new Response(JSON.stringify(user), {headers: headers});
+    return new Response(JSON.stringify(user));
   }
 }
 
@@ -32,7 +32,7 @@ export async function POST(request: Request) {
   // 2. check email existing from postgressql
   const users = await prisma.user.findMany({where: {email: body.email}});
   if(users.length !== 0){
-    return new Response(JSON.stringify('Existing email, please use other email'), {headers: headers});
+    return new Response(JSON.stringify('Existing email, please use other email'));
   }
   
   // 3. create user in firebase 

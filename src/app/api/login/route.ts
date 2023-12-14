@@ -54,6 +54,7 @@ export async function POST(request: Request) {
       { 
         success: true, 
         status: 200, 
+        headers:{'content-type':'application/json'},
         cookies: {
           name: "token",
           value: token,
@@ -62,6 +63,6 @@ export async function POST(request: Request) {
       }
     );
   }
-  return new Response(response, {headers: headers});
+  return new Response(response);
 }
 
