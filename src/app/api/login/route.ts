@@ -11,10 +11,7 @@ interface RequestBody {
 }
 
 const auth = getAuth(firebase_app);
-const headers = {
-  'Access-Control-Allow-Origin' : '*',
-  'Content-Type' : 'application/json',
-};
+
 // 1. Login
 export async function POST(request: Request) {
   const body: RequestBody = await request.json();
@@ -27,7 +24,7 @@ export async function POST(request: Request) {
   });
 
   if(!user){
-    return new Response(JSON.stringify(null), {headers: headers});
+    return new Response(JSON.stringify(null));
   }
   
   //3. login by firebase auth
@@ -37,7 +34,7 @@ export async function POST(request: Request) {
     result = await signInWithEmailAndPassword(auth, body.email, body.password);
   } catch (e) {
     error = e;
-    return new Response(JSON.stringify(error), {headers: headers});
+    return new Response(JSON.stringify(error));
   }
 
   //4. create token
@@ -53,8 +50,7 @@ export async function POST(request: Request) {
     response = JSON.stringify(
       { 
         success: true, 
-        status: 200, 
-        headers:{'content-type':'application/json'},
+        status: 200,
         cookies: {
           name: "token",
           value: token,
