@@ -1,7 +1,7 @@
 import prisma from '@/app/lib/prisma';
 import firebase_app from "@/app/lib/firebase-config";
 import { createUserWithEmailAndPassword, getAuth } from "firebase/auth";
-import { platform } from 'os';
+import { verifyJwtToken } from '@/app/lib/auth';
 
 interface RequestBody {
   email: string;
@@ -14,6 +14,12 @@ const auth = getAuth(firebase_app);
 
 // fetch user / all users
 export async function GET(request: Request) {
+  //token verified 
+  var token = request.headers.get('token');
+  if(!token) return new Response(JSON.stringify({status:400, error:'invalid token'}));
+  const reqUser = await verifyJwtToken(token);
+  if(!reqUser) return new Response(JSON.stringify({status:400, error:'invalid format token'}));
+
   const { searchParams } = new URL(request.url);
   const email = searchParams.get('email');
   if(email === null) {
