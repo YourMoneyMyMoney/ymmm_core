@@ -42,20 +42,16 @@ export async function POST(request: Request) {
   if(result){
     const token = await new SignJWT({
       email: body.email,
+      name: user.name,
+      uid: result.user.uid
     })
       .setProtectedHeader({ alg: "HS256" })
       .setIssuedAt()
-      .setExpirationTime("30s") 
+      .setExpirationTime("1d") 
       .sign(getJwtSecretKey());
     response = JSON.stringify(
       { 
-        success: true, 
-        status: 200,
-        cookies: {
-          name: "token",
-          value: token,
-          path: "/",
-        }
+        token: token
       }
     );
   }
