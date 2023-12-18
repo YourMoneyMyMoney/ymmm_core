@@ -21,7 +21,7 @@ export async function POST(request: Request) {
   });
 
   if(!user){
-    return new Response(JSON.stringify(null));
+    return new Response(JSON.stringify({status:400, message:'no account'}));
   }
   // 3. compare pwd
   if (user && (await bcrypt.compare(body.password, user.password))) {

@@ -53,7 +53,7 @@ export async function POST(request: Request) {
     });
   } catch (e) {
       error = e;
-      return new Response(JSON.stringify(error));
+      return new Response(JSON.stringify({status:400, message:'fail'}));
   }
 
   return new Response(JSON.stringify({status:200, message:'login success'}));
