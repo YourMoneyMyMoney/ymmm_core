@@ -56,7 +56,7 @@ export async function POST(request: Request) {
       return new Response(JSON.stringify(error));
   }
 
-  return new Response(JSON.stringify(result));
+  return new Response(JSON.stringify({status:200, message:'login success'}));
 }
 
 export async function OPTIONS(request: Request) {

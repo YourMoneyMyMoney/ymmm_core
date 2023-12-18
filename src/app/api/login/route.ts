@@ -29,6 +29,8 @@ export async function POST(request: Request) {
     const token = await new SignJWT({
       email: body.email,
       name: user.name,
+      platform: body.platform,
+      userId: user.id
     })
       .setProtectedHeader({ alg: "HS256" })
       .setIssuedAt()
