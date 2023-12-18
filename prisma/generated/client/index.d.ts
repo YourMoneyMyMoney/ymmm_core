@@ -19,9 +19,9 @@ type UnwrapTuple<Tuple extends readonly unknown[]> = {
 export type User = {
   id: number
   email: string
+  password: string
   name: string | null
   platform: string
-  uid: string
 }
 
 /**
@@ -1181,25 +1181,25 @@ export namespace Prisma {
   export type UserMinAggregateOutputType = {
     id: number | null
     email: string | null
+    password: string | null
     name: string | null
     platform: string | null
-    uid: string | null
   }
 
   export type UserMaxAggregateOutputType = {
     id: number | null
     email: string | null
+    password: string | null
     name: string | null
     platform: string | null
-    uid: string | null
   }
 
   export type UserCountAggregateOutputType = {
     id: number
     email: number
+    password: number
     name: number
     platform: number
-    uid: number
     _all: number
   }
 
@@ -1215,25 +1215,25 @@ export namespace Prisma {
   export type UserMinAggregateInputType = {
     id?: true
     email?: true
+    password?: true
     name?: true
     platform?: true
-    uid?: true
   }
 
   export type UserMaxAggregateInputType = {
     id?: true
     email?: true
+    password?: true
     name?: true
     platform?: true
-    uid?: true
   }
 
   export type UserCountAggregateInputType = {
     id?: true
     email?: true
+    password?: true
     name?: true
     platform?: true
-    uid?: true
     _all?: true
   }
 
@@ -1332,9 +1332,9 @@ export namespace Prisma {
   export type UserGroupByOutputType = {
     id: number
     email: string
+    password: string
     name: string | null
     platform: string
-    uid: string
     _count: UserCountAggregateOutputType | null
     _avg: UserAvgAggregateOutputType | null
     _sum: UserSumAggregateOutputType | null
@@ -1359,9 +1359,9 @@ export namespace Prisma {
   export type UserSelect = {
     id?: boolean
     email?: boolean
+    password?: boolean
     name?: boolean
     platform?: boolean
-    uid?: boolean
     userBooks?: boolean | User$userBooksArgs
     records?: boolean | User$recordsArgs
     recordUser?: boolean | User$recordUserArgs
@@ -8608,9 +8608,9 @@ export namespace Prisma {
   export const UserScalarFieldEnum: {
     id: 'id',
     email: 'email',
+    password: 'password',
     name: 'name',
-    platform: 'platform',
-    uid: 'uid'
+    platform: 'platform'
   };
 
   export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
@@ -8627,9 +8627,9 @@ export namespace Prisma {
     NOT?: Enumerable<UserWhereInput>
     id?: IntFilter | number
     email?: StringFilter | string
+    password?: StringFilter | string
     name?: StringNullableFilter | string | null
     platform?: StringFilter | string
-    uid?: StringFilter | string
     userBooks?: UserBookListRelationFilter
     records?: RecordListRelationFilter
     recordUser?: RecordUserListRelationFilter
@@ -8638,9 +8638,9 @@ export namespace Prisma {
   export type UserOrderByWithRelationInput = {
     id?: SortOrder
     email?: SortOrder
+    password?: SortOrder
     name?: SortOrder
     platform?: SortOrder
-    uid?: SortOrder
     userBooks?: UserBookOrderByRelationAggregateInput
     records?: RecordOrderByRelationAggregateInput
     recordUser?: RecordUserOrderByRelationAggregateInput
@@ -8649,15 +8649,14 @@ export namespace Prisma {
   export type UserWhereUniqueInput = {
     id?: number
     email?: string
-    uid?: string
   }
 
   export type UserOrderByWithAggregationInput = {
     id?: SortOrder
     email?: SortOrder
+    password?: SortOrder
     name?: SortOrder
     platform?: SortOrder
-    uid?: SortOrder
     _count?: UserCountOrderByAggregateInput
     _avg?: UserAvgOrderByAggregateInput
     _max?: UserMaxOrderByAggregateInput
@@ -8671,9 +8670,9 @@ export namespace Prisma {
     NOT?: Enumerable<UserScalarWhereWithAggregatesInput>
     id?: IntWithAggregatesFilter | number
     email?: StringWithAggregatesFilter | string
+    password?: StringWithAggregatesFilter | string
     name?: StringNullableWithAggregatesFilter | string | null
     platform?: StringWithAggregatesFilter | string
-    uid?: StringWithAggregatesFilter | string
   }
 
   export type UserBookWhereInput = {
@@ -8942,9 +8941,9 @@ export namespace Prisma {
 
   export type UserCreateInput = {
     email: string
+    password: string
     name?: string | null
     platform: string
-    uid: string
     userBooks?: UserBookCreateNestedManyWithoutMemberInput
     records?: RecordCreateNestedManyWithoutAuthorInput
     recordUser?: RecordUserCreateNestedManyWithoutEffectedUserInput
@@ -8953,9 +8952,9 @@ export namespace Prisma {
   export type UserUncheckedCreateInput = {
     id?: number
     email: string
+    password: string
     name?: string | null
     platform: string
-    uid: string
     userBooks?: UserBookUncheckedCreateNestedManyWithoutMemberInput
     records?: RecordUncheckedCreateNestedManyWithoutAuthorInput
     recordUser?: RecordUserUncheckedCreateNestedManyWithoutEffectedUserInput
@@ -8963,9 +8962,9 @@ export namespace Prisma {
 
   export type UserUpdateInput = {
     email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
     name?: NullableStringFieldUpdateOperationsInput | string | null
     platform?: StringFieldUpdateOperationsInput | string
-    uid?: StringFieldUpdateOperationsInput | string
     userBooks?: UserBookUpdateManyWithoutMemberNestedInput
     records?: RecordUpdateManyWithoutAuthorNestedInput
     recordUser?: RecordUserUpdateManyWithoutEffectedUserNestedInput
@@ -8974,9 +8973,9 @@ export namespace Prisma {
   export type UserUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
     email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
     name?: NullableStringFieldUpdateOperationsInput | string | null
     platform?: StringFieldUpdateOperationsInput | string
-    uid?: StringFieldUpdateOperationsInput | string
     userBooks?: UserBookUncheckedUpdateManyWithoutMemberNestedInput
     records?: RecordUncheckedUpdateManyWithoutAuthorNestedInput
     recordUser?: RecordUserUncheckedUpdateManyWithoutEffectedUserNestedInput
@@ -8985,24 +8984,24 @@ export namespace Prisma {
   export type UserCreateManyInput = {
     id?: number
     email: string
+    password: string
     name?: string | null
     platform: string
-    uid: string
   }
 
   export type UserUpdateManyMutationInput = {
     email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
     name?: NullableStringFieldUpdateOperationsInput | string | null
     platform?: StringFieldUpdateOperationsInput | string
-    uid?: StringFieldUpdateOperationsInput | string
   }
 
   export type UserUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
     email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
     name?: NullableStringFieldUpdateOperationsInput | string | null
     platform?: StringFieldUpdateOperationsInput | string
-    uid?: StringFieldUpdateOperationsInput | string
   }
 
   export type UserBookCreateInput = {
@@ -9334,9 +9333,9 @@ export namespace Prisma {
   export type UserCountOrderByAggregateInput = {
     id?: SortOrder
     email?: SortOrder
+    password?: SortOrder
     name?: SortOrder
     platform?: SortOrder
-    uid?: SortOrder
   }
 
   export type UserAvgOrderByAggregateInput = {
@@ -9346,17 +9345,17 @@ export namespace Prisma {
   export type UserMaxOrderByAggregateInput = {
     id?: SortOrder
     email?: SortOrder
+    password?: SortOrder
     name?: SortOrder
     platform?: SortOrder
-    uid?: SortOrder
   }
 
   export type UserMinOrderByAggregateInput = {
     id?: SortOrder
     email?: SortOrder
+    password?: SortOrder
     name?: SortOrder
     platform?: SortOrder
-    uid?: SortOrder
   }
 
   export type UserSumOrderByAggregateInput = {
@@ -10456,9 +10455,9 @@ export namespace Prisma {
 
   export type UserCreateWithoutUserBooksInput = {
     email: string
+    password: string
     name?: string | null
     platform: string
-    uid: string
     records?: RecordCreateNestedManyWithoutAuthorInput
     recordUser?: RecordUserCreateNestedManyWithoutEffectedUserInput
   }
@@ -10466,9 +10465,9 @@ export namespace Prisma {
   export type UserUncheckedCreateWithoutUserBooksInput = {
     id?: number
     email: string
+    password: string
     name?: string | null
     platform: string
-    uid: string
     records?: RecordUncheckedCreateNestedManyWithoutAuthorInput
     recordUser?: RecordUserUncheckedCreateNestedManyWithoutEffectedUserInput
   }
@@ -10501,9 +10500,9 @@ export namespace Prisma {
 
   export type UserUpdateWithoutUserBooksInput = {
     email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
     name?: NullableStringFieldUpdateOperationsInput | string | null
     platform?: StringFieldUpdateOperationsInput | string
-    uid?: StringFieldUpdateOperationsInput | string
     records?: RecordUpdateManyWithoutAuthorNestedInput
     recordUser?: RecordUserUpdateManyWithoutEffectedUserNestedInput
   }
@@ -10511,9 +10510,9 @@ export namespace Prisma {
   export type UserUncheckedUpdateWithoutUserBooksInput = {
     id?: IntFieldUpdateOperationsInput | number
     email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
     name?: NullableStringFieldUpdateOperationsInput | string | null
     platform?: StringFieldUpdateOperationsInput | string
-    uid?: StringFieldUpdateOperationsInput | string
     records?: RecordUncheckedUpdateManyWithoutAuthorNestedInput
     recordUser?: RecordUserUncheckedUpdateManyWithoutEffectedUserNestedInput
   }
@@ -10616,9 +10615,9 @@ export namespace Prisma {
 
   export type UserCreateWithoutRecordUserInput = {
     email: string
+    password: string
     name?: string | null
     platform: string
-    uid: string
     userBooks?: UserBookCreateNestedManyWithoutMemberInput
     records?: RecordCreateNestedManyWithoutAuthorInput
   }
@@ -10626,9 +10625,9 @@ export namespace Prisma {
   export type UserUncheckedCreateWithoutRecordUserInput = {
     id?: number
     email: string
+    password: string
     name?: string | null
     platform: string
-    uid: string
     userBooks?: UserBookUncheckedCreateNestedManyWithoutMemberInput
     records?: RecordUncheckedCreateNestedManyWithoutAuthorInput
   }
@@ -10669,9 +10668,9 @@ export namespace Prisma {
 
   export type UserUpdateWithoutRecordUserInput = {
     email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
     name?: NullableStringFieldUpdateOperationsInput | string | null
     platform?: StringFieldUpdateOperationsInput | string
-    uid?: StringFieldUpdateOperationsInput | string
     userBooks?: UserBookUpdateManyWithoutMemberNestedInput
     records?: RecordUpdateManyWithoutAuthorNestedInput
   }
@@ -10679,9 +10678,9 @@ export namespace Prisma {
   export type UserUncheckedUpdateWithoutRecordUserInput = {
     id?: IntFieldUpdateOperationsInput | number
     email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
     name?: NullableStringFieldUpdateOperationsInput | string | null
     platform?: StringFieldUpdateOperationsInput | string
-    uid?: StringFieldUpdateOperationsInput | string
     userBooks?: UserBookUncheckedUpdateManyWithoutMemberNestedInput
     records?: RecordUncheckedUpdateManyWithoutAuthorNestedInput
   }
@@ -10712,9 +10711,9 @@ export namespace Prisma {
 
   export type UserCreateWithoutRecordsInput = {
     email: string
+    password: string
     name?: string | null
     platform: string
-    uid: string
     userBooks?: UserBookCreateNestedManyWithoutMemberInput
     recordUser?: RecordUserCreateNestedManyWithoutEffectedUserInput
   }
@@ -10722,9 +10721,9 @@ export namespace Prisma {
   export type UserUncheckedCreateWithoutRecordsInput = {
     id?: number
     email: string
+    password: string
     name?: string | null
     platform: string
-    uid: string
     userBooks?: UserBookUncheckedCreateNestedManyWithoutMemberInput
     recordUser?: RecordUserUncheckedCreateNestedManyWithoutEffectedUserInput
   }
@@ -10804,9 +10803,9 @@ export namespace Prisma {
 
   export type UserUpdateWithoutRecordsInput = {
     email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
     name?: NullableStringFieldUpdateOperationsInput | string | null
     platform?: StringFieldUpdateOperationsInput | string
-    uid?: StringFieldUpdateOperationsInput | string
     userBooks?: UserBookUpdateManyWithoutMemberNestedInput
     recordUser?: RecordUserUpdateManyWithoutEffectedUserNestedInput
   }
@@ -10814,9 +10813,9 @@ export namespace Prisma {
   export type UserUncheckedUpdateWithoutRecordsInput = {
     id?: IntFieldUpdateOperationsInput | number
     email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
     name?: NullableStringFieldUpdateOperationsInput | string | null
     platform?: StringFieldUpdateOperationsInput | string
-    uid?: StringFieldUpdateOperationsInput | string
     userBooks?: UserBookUncheckedUpdateManyWithoutMemberNestedInput
     recordUser?: RecordUserUncheckedUpdateManyWithoutEffectedUserNestedInput
   }
