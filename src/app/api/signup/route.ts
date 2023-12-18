@@ -14,9 +14,9 @@ export async function GET(request: Request) {
 
   //token verified 
   var token = request.headers.get('token');
-  if(!token) return new Response(JSON.stringify({status:400, error:'invalid token'}));
+  if(!token) return new Response(JSON.stringify({status:404, error:'invalid token'}));
   const reqUser = await verifyJwtToken(token);
-  if(!reqUser) return new Response(JSON.stringify({status:400, error:'invalid format token'}));
+  if(!reqUser) return new Response(JSON.stringify({status:404, error:'invalid format token'}));
   
   const { searchParams } = new URL(request.url);
   const email = searchParams.get('email');

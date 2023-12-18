@@ -34,10 +34,18 @@ model UserBook {
 model Book {
   id            Int     @id @default(autoincrement())
   title         String
+  currency      Currency @relation(fields: [currencyId], references: [id])
+  currencyId    Int
   userBooks     UserBook[]
   records       Record[]
 }
 
+model Currency {
+  id            Int     @id @default(autoincrement())
+  name          String
+  code          String
+  book          Book[]
+}
 // many to many solution(Record:User)
 model RecordUser {
   id            Int     @id @default(autoincrement())
