@@ -50,10 +50,15 @@ export async function POST(request: Request) {
     }else{
         try{
             var token = request.headers.get('token');
-            if(!token) return new Response(JSON.stringify({status:400, error:'invalid token'}));
+            if(!token) return new Response(JSON.stringify({status:404, error:'invalid token'}));
             const reqUser = await verifyJwtToken(token);
-            if(!reqUser) return new Response(JSON.stringify({status:400, error:'invalid format token'}));
+            if(!reqUser) return new Response(JSON.stringify({status:404, error:'invalid format token'}));
     
+
+            if(reqUser.userId !== user.id){
+                return new Response(JSON.stringify({error:'not authorization'}));
+            }
+            
             updatedUser = await prisma.user.update({
                 select:{
                     email: true,

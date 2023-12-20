@@ -25,18 +25,36 @@ export async function POST(request: Request) {
   }
   // 3. compare pwd
   if (user && (await bcrypt.compare(body.password, user.password))) {
-    //4. create token
-    const token = await new SignJWT({
-      email: body.email,
-      name: user.name,
-      platform: body.platform,
-      userId: user.id
-    })
-      .setProtectedHeader({ alg: "HS256" })
-      .setIssuedAt()
-      .setExpirationTime("1d") 
-      .sign(getJwtSecretKey());
-    return new Response(JSON.stringify({token: token}));
+    try{
+      const books = await prisma.userBook.findMany({ 
+        select:{
+            id: true,
+            book: {
+                select:{
+                    id: true,
+                    title: true,
+                    currency:{}
+                }
+            },
+        },
+        where:{memberId: user.id}
+      });
+      //4. create token
+      const token = await new SignJWT({
+        userId: user.id,
+        email: body.email,
+        name: user.name,
+        platform: body.platform,
+        books: books,
+      })
+        .setProtectedHeader({ alg: "HS256" })
+        .setIssuedAt()
+        .setExpirationTime("1d") 
+        .sign(getJwtSecretKey());
+        return new Response(JSON.stringify({token: token}));
+    }catch(e){
+      return new Response(JSON.stringify(e));
+    }
   } else return new Response(JSON.stringify(null));
 }
 

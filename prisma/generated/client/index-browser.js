@@ -91,7 +91,14 @@ function makeEnum(x) { return x; }
 
 exports.Prisma.BookScalarFieldEnum = makeEnum({
   id: 'id',
-  title: 'title'
+  title: 'title',
+  currencyId: 'currencyId'
+});
+
+exports.Prisma.CurrencyScalarFieldEnum = makeEnum({
+  id: 'id',
+  name: 'name',
+  code: 'code'
 });
 
 exports.Prisma.QueryMode = makeEnum({
@@ -156,6 +163,7 @@ exports.Prisma.ModelName = makeEnum({
   User: 'User',
   UserBook: 'UserBook',
   Book: 'Book',
+  Currency: 'Currency',
   RecordUser: 'RecordUser',
   Record: 'Record',
   RecordType: 'RecordType',
